@@ -46,9 +46,9 @@ class ICDARDetection(data.Dataset):
         else:
 
             ic13_list_path = self.root + '/icdar2013/test_list.txt'
-            ic13_samples = open(ic13_list_path, 'r').readlines()
-            ic13_gt_paths = [self.root + '/icdar2013/test_gts/' + timg.strip() + '.txt' for timg in ic13_samples]
-            ic13_img_paths = [self.root + '/icdar2013/test_images/' + timg.strip() for timg in ic13_samples]
+            #ic13_samples = open(ic13_list_path, 'r').readlines()
+            ic13_gt_paths = [] # [self.root + '/icdar2013/test_gts/' + timg.strip() + '.txt' for timg in ic13_samples]
+            ic13_img_paths = [] # [self.root + '/icdar2013/test_images/' + timg.strip() for timg in ic13_samples]
             ## get ic15 list
             ic15_list_path = self.root + 'icdar2015/test_list.txt'
             ic15_samples = open(ic15_list_path, 'r').readlines()
