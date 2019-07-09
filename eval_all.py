@@ -4,7 +4,7 @@ import torch.nn as nn
 import argparse
 import torch.utils.data as data
 from torch.autograd import Variable
-from data import  train_cfg, cfg_768x1280, cfg_512x512, cfg_768x768, cfg_1280x1280, AnnotationTransform, ICDARDetection, detection_collate, TD500Detection, COCODetection
+from data import  train_cfg, cfg_768x1280, cfg_512x512, cfg_768x768, cfg_1280x1280, AnnotationTransform, ICDARDetection, detection_collate, TD500Detection, COCODetection, get_boxes
 from utils.augmentations_poly import SSDAugmentation
 from utils.logger import setup_logger
 from dssd import build_dssd
