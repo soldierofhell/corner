@@ -8,7 +8,7 @@ from PIL import Image, ImageDraw, ImageFont
 import cv2
 import numpy as np
 import math
-from utils import get_boxes, generate_gt
+from .utils import get_boxes, generate_gt
 
 ## Data Loader of COCO-Text
 class COCODetection(data.Dataset):
