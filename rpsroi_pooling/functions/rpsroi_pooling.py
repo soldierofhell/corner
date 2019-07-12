@@ -1,6 +1,8 @@
 import torch
 from torch.autograd import Function
-from .._ext import rpsroi_pooling 
+from torch.utils.cpp_extension import load
+
+rpsroi_pooling = load(name="rpsroi_pooling", sources=["../cpu/rpsroi_pooling.cpp"])
 
 
 class RPSRoIPoolingFunction(Function):
@@ -27,7 +29,7 @@ class RPSRoIPoolingFunction(Function):
         output = output.cuda()
         mappingchannel = mappingchannel.cuda()
         areas = areas.cuda()
-        rpsroi_pooling.rpsroi_pooling_forward_cuda(self.pooled_height, self.pooled_width, self.spatial_scale, self.group_size, self.output_dim, \
+        rpsroi_pooling.RPSROIPool_forward_cpu(self.pooled_height, self.pooled_width, self.spatial_scale, self.group_size, self.output_dim, \
 features, rois, output, mappingchannel, areas);
         self.output = output
         self.mappingchannel = mappingchannel
