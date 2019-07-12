@@ -1,6 +1,4 @@
-#include <ATen/ATen.h>
-#include <ATen/TensorUtils.h>
-#include <TH/TH.h>
+#include <torch/extension.h>
 
 #include <math.h>
 
@@ -128,7 +126,7 @@ void RPSROIPoolForward(
 }
 
 
-std::tuple<at::Tensor, at::Tensor> RPSROIPool_forward_cpu(
+at::Tensor RPSROIPool_forward_cpu(
     const at::Tensor& input,
     const at::Tensor& rois,
     const float spatial_scale,
