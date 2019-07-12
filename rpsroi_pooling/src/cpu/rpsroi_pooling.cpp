@@ -11,7 +11,7 @@ void RPSROIPoolForward(
     const int width,
     const int pooled_height,
     const int pooled_width,
-    const int group_size, // =1
+    const int group_size, // =pooled_height=pooled_width=2
     const int output_dim, // =1
     const T* bottom_rois, // rois
     const int num_rois, // added
@@ -27,7 +27,7 @@ void RPSROIPoolForward(
     for (int ph = 0; ph < pooled_height; ++ph) {
       for (int pw = 0; pw < pooled_width; ++pw) {
         
-        index = ;
+        index = (n*pooled_height + ph)*pooled_width + pw;
 
         float roi_x1 = static_cast<float>(round(bottom_rois[1])) * spatial_scale;
         float roi_y1 = static_cast<float>(round(bottom_rois[2])) * spatial_scale;
