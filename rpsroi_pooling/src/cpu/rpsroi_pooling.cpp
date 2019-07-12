@@ -15,9 +15,9 @@ void RPSROIPoolForward(
     const int output_dim, // =1
     const T* bottom_rois, // rois
     const int num_rois, // added
-    float* top_data, // output score for Bin[i] = (P/C)[i] 
-    int* mapping_channel, // channel = 1
-    float* areas) { // C[i]
+    T* top_data) { // output score for Bin[i] = (P/C)[i] 
+    //int* mapping_channel, // channel = 1
+    //float* areas) { // C[i]
   for (int n = 0; n < num_rois; ++n) {
     // (n, c, ph, pw) is an element in the pooled output
 
@@ -119,8 +119,8 @@ void RPSROIPoolForward(
         //cout << "bin_area: " << bin_area <<" out_sum: " << out_sum << endl;
         //printf("bin_area: %f, out_sum: %f\n", bin_area, out_sum);
       	top_data[index] = (is_empty || (bin_area ==0)) ? 0. : out_sum/bin_area;
-      	mapping_channel[index] = c;
-        areas[index] = bin_area;
+      	//mapping_channel[index] = c;
+        //areas[index] = bin_area;
 
     }
 }
@@ -130,6 +130,8 @@ at::Tensor RPSROIPool_forward_cpu(
     const at::Tensor& input,
     const at::Tensor& rois,
     const float spatial_scale,
+    const int group_size,
+    const int output_dim,
     const int pooled_height,
     const int pooled_width) {
   AT_ASSERTM(input.device().is_cpu(), "input must be a CPU tensor");
@@ -147,16 +149,13 @@ at::Tensor RPSROIPool_forward_cpu(
 
   at::Tensor output = at::zeros(
       {num_rois, channels, pooled_height, pooled_width}, input.options());
-  at::Tensor argmax = at::zeros(
-      {num_rois, channels, pooled_height, pooled_width},
-      input.options().dtype(at::kInt));
 
   if (output.numel() == 0) {
-    return std::make_tuple(output, argmax);
+    return output);
   }
 
-  AT_DISPATCH_FLOATING_TYPES_AND_HALF(input.type(), "ROIPool_forward", [&] {
-    RoIPoolForward<scalar_t>(
+  AT_DISPATCH_FLOATING_TYPES_AND_HALF(input.type(), "RPSROIPool_forward", [&] {
+    RPSRoIPoolForward<scalar_t>(
         input.contiguous().data<scalar_t>(),
         spatial_scale,
         channels,
@@ -164,10 +163,11 @@ at::Tensor RPSROIPool_forward_cpu(
         width,
         pooled_height,
         pooled_width,
+        group_size,
+        output_dim,
         rois.contiguous().data<scalar_t>(),
         num_rois,
-        output.data<scalar_t>(),
-        argmax.data<int>());
+        output.data<scalar_t>();
   });
-  return std::make_tuple(output, argmax);
+  return output;
 }
