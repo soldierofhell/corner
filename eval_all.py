@@ -41,11 +41,11 @@ def ploy_nms(boxes, thresh):
 
 def get_score_rpsroi(bboxes, seg_cuda, rpsroi_pool):
     if len(bboxes) > 0:
-        sample_index = torch.zeros(len(bboxes)).view(-1, 1).cuda()
-        bboxes = torch.from_numpy(np.array(bboxes)).float().cuda()
+        sample_index = torch.zeros(len(bboxes)).view(-1, 1) #.cuda()
+        bboxes = torch.from_numpy(np.array(bboxes)).float() #.cuda()
         rois = Variable(torch.cat((sample_index, bboxes), 1))
-        seg_cuda  = seg_cuda.data
-        seg_cuda = torch.index_select(seg_cuda, 1, torch.LongTensor([0, 1, 3, 2]).cuda())
+        seg_cuda  = seg_cuda.data.cpu()
+        seg_cuda = torch.index_select(seg_cuda, 1, torch.LongTensor([0, 1, 3, 2])) # .cuda()
         seg_cuda = Variable(seg_cuda)
         rps_score = rpsroi_pool.forward(seg_cuda, rois)
         return rps_score.data.cpu().view(-1, 4).mean(1).numpy()
