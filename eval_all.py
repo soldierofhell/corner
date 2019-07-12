@@ -47,7 +47,7 @@ def get_score_rpsroi(bboxes, seg_cuda, rpsroi_pool):
         seg_cuda  = seg_cuda.data.cpu()
         seg_cuda = torch.index_select(seg_cuda, 1, torch.LongTensor([0, 1, 3, 2])) # .cuda()
         seg_cuda = Variable(seg_cuda)
-        rps_score = rpsroi_pool.forward(seg_cuda, rois)
+        rps_score = rpsroi_pool(seg_cuda, rois)
         return rps_score.data.cpu().view(-1, 4).mean(1).numpy()
     else:
         return np.array([-1])
