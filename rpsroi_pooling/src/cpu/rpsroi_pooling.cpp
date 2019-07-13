@@ -4,7 +4,7 @@
 using namespace std;
 
 template <typename T>
-void RPSROIPoolForward(
+void RPSRoIPoolForward(
     const T* bottom_data, // input
     const T spatial_scale,
     const int channels,
