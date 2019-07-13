@@ -122,8 +122,10 @@ void RPSROIPoolForward(
       	top_data[index] = (is_empty || (bin_area ==0)) ? 0. : out_sum/bin_area;
       	//mapping_channel[index] = c;
         //areas[index] = bin_area;
-
+      
+      }
     }
+  }
 }
 
 
