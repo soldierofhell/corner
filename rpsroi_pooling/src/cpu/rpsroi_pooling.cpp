@@ -152,7 +152,7 @@ at::Tensor RPSROIPool_forward_cpu(
       {num_rois, channels, pooled_height, pooled_width}, input.options());
 
   if (output.numel() == 0) {
-    return output);
+    return output;
   }
 
   AT_DISPATCH_FLOATING_TYPES_AND_HALF(input.type(), "RPSROIPool_forward", [&] {
