@@ -28,7 +28,7 @@ void RPSRoIPoolForward(
     for (int ph = 0; ph < pooled_height; ++ph) {
       for (int pw = 0; pw < pooled_width; ++pw) {
         
-        index = (n*pooled_height + ph)*pooled_width + pw;
+        idx = (n*pooled_height + ph)*pooled_width + pw;
 
         float roi_x1 = static_cast<float>(round(bottom_rois[1])) * spatial_scale;
         float roi_y1 = static_cast<float>(round(bottom_rois[2])) * spatial_scale;
@@ -119,7 +119,7 @@ void RPSRoIPoolForward(
         /////////////////////////////DEBUG//////////////////////////
         //cout << "bin_area: " << bin_area <<" out_sum: " << out_sum << endl;
         //printf("bin_area: %f, out_sum: %f\n", bin_area, out_sum);
-      	top_data[index] = (is_empty || (bin_area ==0)) ? 0. : out_sum/bin_area;
+      	top_data[idx] = (is_empty || (bin_area ==0)) ? 0. : out_sum/bin_area;
       	//mapping_channel[index] = c;
         //areas[index] = bin_area;
       
