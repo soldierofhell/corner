@@ -1,6 +1,7 @@
 #include <torch/extension.h>
-
 #include <algorithm>
+
+using namespace std;
 
 template <typename T>
 void RPSROIPoolForward(
