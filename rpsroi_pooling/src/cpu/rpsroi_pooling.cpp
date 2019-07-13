@@ -170,7 +170,7 @@ at::Tensor RPSROIPool_forward_cpu(
         output_dim,
         rois.contiguous().data<scalar_t>(),
         num_rois,
-        output.data<scalar_t>();
+        output.data<scalar_t>());
   });
   return output;
 }
