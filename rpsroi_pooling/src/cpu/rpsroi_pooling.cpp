@@ -142,7 +142,7 @@ at::Tensor RPSROIPool_forward_cpu(
 
   at::TensorArg input_t{input, "input", 1}, rois_t{rois, "rois", 2};
 
-  at::CheckedFrom c = "ROIPool_forward_cpu";
+  at::CheckedFrom c = "RPSROIPool_forward_cpu";
   at::checkAllSameType(c, {input_t, rois_t});
 
   int num_rois = rois.size(0);
