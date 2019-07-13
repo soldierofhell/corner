@@ -94,7 +94,7 @@ void RPSROIPoolForward(
 
         int gw = pw;
       	int gh = ph;
-      	int c = (ctop*group_size + gh)*group_size + gw;
+      	int c = (0*group_size + gh)*group_size + gw;
         // printf("c:%d %d %d %d\n", c, channels, height, width);
 
         bottom_data += (roi_batch_ind * channels + c) * height * width;
