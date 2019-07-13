@@ -1,7 +1,7 @@
 import torch
 from torch.utils.cpp_extension import load
 
-rpsroi_pooling = load(name="rpsroi_pooling", sources=["/content/corner/rpsroi_pooling/src/cpu/rpsroi_pooling.cpp"])
+rpsroi_pooling = load(name="RPSROIPool_forward_cpu", sources=["/content/corner/rpsroi_pooling/src/cpu/rpsroi_pooling.cpp"])
 
 
 class RPSRoIPoolingFunction():
