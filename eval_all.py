@@ -15,7 +15,7 @@ from PIL import Image, ImageDraw
 import math
 import cv2
 from shapely.geometry import box, Polygon
-from rpsroi_pooling.functions.rpsroi_pool import RPSRoIPool
+from rpsroi_pooling.functions.rpsroi_pooling import RPSRoIPool
 
 def edge_len(x1, y1, x2, y2):
     return math.sqrt((x2 - x1)*(x2-x1) + (y2 - y1)*(y2-y1))
