@@ -21,7 +21,7 @@ void RPSRoIPoolForward(
     //int* mapping_channel, // channel = 1
     //float* areas) { // C[i]
     
-  cout << "channels: " << channels << " height: " << height << " width: " << width;
+  cout << "channels: " << channels << " height: " << height << " width: " << width << " group size: " << group_size;
       
   for (int n = 0; n < num_rois; ++n) {
     // (n, c, ph, pw) is an element in the pooled output
