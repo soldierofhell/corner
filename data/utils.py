@@ -28,7 +28,7 @@ class AnnotationTransform(object):
 def get_tight_rect(bb):
     ## bb: [x1, y1, x2, y2.......]
     points = []
-    for i in range(len(bb)/2):
+    for i in range(int(len(bb)/2)):
         points.append([int(bb[2*i]), int(bb[2*i+1])])
     bounding_box = cv2.minAreaRect(np.array(points))
     points = cv2.boxPoints(bounding_box)
