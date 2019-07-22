@@ -15,8 +15,8 @@ class RPSRoIPool():
         assert(self.pooled_height == self.group_size)
 
     def __call__(self, features, rois):
-        batch_size, num_channels, data_height, data_width = features.size()
-        num_rois = rois.size()[0]
+        #batch_size, num_channels, data_height, data_width = features.size()
+        #num_rois = rois.size()[0]
         output = rpsroi_pooling.forward(
             features,
             rois,
