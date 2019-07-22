@@ -52,7 +52,7 @@ class ICDARDetection(data.Dataset):
             ## get ic15 list
             ic15_list_path = self.root + '/icdar2015/test_list.txt'
             ic15_samples = open(ic15_list_path, 'r').readlines()
-            ic15_gt_paths = [self.root + '/icdar2015/test_gts/' + timg.strip().split('.')[0] + '.txt' for timg in ic15_samples]
+            ic15_gt_paths = [self.root + '/icdar2015/test_gts/gt_' + timg.strip().split('.')[0] + '.txt' for timg in ic15_samples]
             ic15_img_paths = [self.root + '/icdar2015/test_images/' + timg.strip() for timg in ic15_samples]
             assert(self.name == '13' or self.name == '15')
             if self.name == '13':
