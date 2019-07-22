@@ -97,12 +97,12 @@ void RPSRoIPoolForward(
         //cout << "start&&end norm: " << hstart << " " << hend << " " << wstart << " " << wend;
         //printf("start&&end norm: %d, %d, %d, %d\n", hstart, hend, wstart, wend);
 
-        int gw = pw;
-      	int gh = ph;
+        //nt gw = pw;
+      	//int gh = ph;
           
-        for (int ctop = 0; ctop < channels; ++ctop) {
+        for (int c = 0; c < channels; ++c) {
           
-            int c = (ctop*group_size + gh)*group_size + gw;
+            //int c = (ctop*group_size + gh)*group_size + gw;
             // printf("c:%d %d %d %d\n", c, channels, height, width);
 
             bottom_data += (roi_batch_ind * channels + c) * height * width;
