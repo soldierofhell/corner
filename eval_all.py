@@ -130,6 +130,7 @@ def get_boxes(top_left_points, top_right_points, bottom_right_points, bottom_lef
 
 
     scores = get_score_rpsroi(random_box, seg_cuda, rpsroi_pool)
+    logging.info('rpsroi_pool scores: ' + str(scores))
     for i in range(len(random_box)):
         if scores[i] > thre:
             candidate_box.append(random_box[i] + [scores[i]])
