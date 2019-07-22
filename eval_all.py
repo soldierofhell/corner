@@ -322,7 +322,7 @@ def main():
         net = net.cuda()
         #rpsroi_pool = rpsroi_pool.cuda()
     net.eval()
-    rpsroi_pool.eval()
+    #rpsroi_pool.eval()
     if os.path.exists(args.out)==False:
         os.makedirs(args.out)
     save_dir = args.out + '/' + args.resume.strip().split('_')[-1].split('.')[0] + '/'
