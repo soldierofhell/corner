@@ -175,6 +175,6 @@ at::Tensor RPSRoIPool_forward_cpu(
   return output;
 }
 
-PYBIND11_MODULE("RPSRoIPool_forward_cpu", m) {
-  m.def("forward", &RPSRoIPool_forward_cpu, "LLTM forward");
+PYBIND11_MODULE(rpsroi_pooling, m) {
+  m.def("forward", &RPSRoIPool_forward_cpu, "RPSRoIPool forward");
 }
