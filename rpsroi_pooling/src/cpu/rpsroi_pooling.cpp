@@ -21,7 +21,7 @@ void RPSRoIPoolForward(
     //int* mapping_channel, // channel = 1
     //float* areas) { // C[i]
     
-  cout << "channels: " << channels << " height: " << height << " width: " << width << " group size: " << group_size;
+  cout << "channels: " << channels << " height: " << height << " width: " << width << " group size: " << group_size << endl;
       
   for (int n = 0; n < num_rois; ++n) {
     // (n, c, ph, pw) is an element in the pooled output
@@ -43,7 +43,7 @@ void RPSRoIPoolForward(
         float roi_y4 = static_cast<float>(round(bottom_rois[8])) * spatial_scale;
 
         ////////////////////////////////DEBUG////////////////////////////////////
-        cout << " n: " << n;
+        cout << " n: " << n << endl;
         cout << "rois: " << roi_x1 << " " << roi_y1 << " " << roi_x2 << " " << roi_y2 << " " << roi_x3 << " " << roi_y3 << " " << roi_x4 << " " << roi_y4 << endl;
         //printf("rois: %f, %f, %f, %f, %f, %f, %f, %f\n", roi_x1, roi_y1, roi_x2, roi_y2, roi_x3, roi_y3, roi_x4, roi_y4);
 
@@ -108,7 +108,7 @@ void RPSRoIPoolForward(
             
             int idx = ((n*channels+c)*pooled_height + ph)*pooled_width + pw;
             
-            cout << " index: " << idx;
+            cout << " index: " << idx << endl;
           
             //int c = (ctop*group_size + gh)*group_size + gw;
             // printf("c:%d %d %d %d\n", c, channels, height, width);
