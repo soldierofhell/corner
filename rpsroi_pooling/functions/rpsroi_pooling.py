@@ -17,7 +17,7 @@ class RPSRoIPoolingFunction():
     def __call__(self, features, rois):
         batch_size, num_channels, data_height, data_width = features.size()
         num_rois = rois.size()[0]
-        output = rpsroi_pooling.RPSROIPool_forward_cpu(
+        output = rpsroi_pooling.RPSRoIPool_forward_cpu(
             self.pooled_height,
             self.pooled_width,
             self.spatial_scale,
