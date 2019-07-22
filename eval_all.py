@@ -225,6 +225,7 @@ def eval_img(out, seg_pred, seg_map, rpsroi_pool, img, save_name, seg_dir, box_d
         bottom_left.save(seg_dir + '/' + save_name + '_4.jpg')
 
     candidate_boxes = get_boxes(top_left_points, top_right_points, bottom_right_points, bottom_left_points, seg, seg_map, rpsroi_pool, 0.60)
+    logging.info(candidate_boxes)
     keep = ploy_nms(candidate_boxes, 0.3)
     keep_box = []
     for j, item in enumerate(candidate_boxes):
