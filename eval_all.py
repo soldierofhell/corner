@@ -341,7 +341,7 @@ def main():
     logging.info('eval begin')
     for i, sample in enumerate(data_loader, 0):
         img, image_name,ori_h, ori_w = sample
-        logging.info('image: ' + image_name)
+        logging.info('image: ' + image_name[0])
         # print(image_name)
         if i % 100 == 0:
             print(i, len(data_loader))
