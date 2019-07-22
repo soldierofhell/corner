@@ -40,6 +40,7 @@ def ploy_nms(boxes, thresh):
     return keep
 
 def get_score_rpsroi(bboxes, seg_cuda, rpsroi_pool):
+    logging.info('number of bboxes before rpsroipool: ' + str(len(bboxes)))
     if len(bboxes) > 0:
         sample_index = torch.zeros(len(bboxes)).view(-1, 1) #.cuda()
         bboxes = torch.from_numpy(np.array(bboxes)).float() #.cuda()
