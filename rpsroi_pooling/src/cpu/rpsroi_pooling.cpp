@@ -129,7 +129,7 @@ void RPSRoIPoolForward(
 }
 
 
-at::Tensor RPSROIPool_forward_cpu(
+at::Tensor RPSRoIPool_forward_cpu(
     const at::Tensor& input,
     const at::Tensor& rois,
     const float spatial_scale,
