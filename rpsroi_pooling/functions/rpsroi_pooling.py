@@ -4,7 +4,7 @@ from torch.utils.cpp_extension import load
 rpsroi_pooling = load(name="rpsroi_pooling", sources=["/content/corner/rpsroi_pooling/src/cpu/rpsroi_pooling.cpp"], verbose=True)
 
 
-class RPSRoIPoolingFunction():
+class RPSRoIPool():
     def __init__(self, pooled_height, pooled_width, spatial_scale, group_size, output_dim):
         self.pooled_width = int(pooled_width)
         self.pooled_height = int(pooled_height)
