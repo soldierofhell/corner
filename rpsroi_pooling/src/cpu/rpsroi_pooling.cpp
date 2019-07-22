@@ -174,3 +174,7 @@ at::Tensor RPSRoIPool_forward_cpu(
   });
   return output;
 }
+
+PYBIND11_MODULE(/*TORCH_EXTENSION_NAME*/ "RPSRoIPool_forward_cpu", m) {
+  m.def("forward", &RPSRoIPool_forward_cpu, "LLTM forward");
+}
