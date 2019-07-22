@@ -99,35 +99,38 @@ void RPSRoIPoolForward(
 
         int gw = pw;
       	int gh = ph;
-      	int c = (0*group_size + gh)*group_size + gw;
-        // printf("c:%d %d %d %d\n", c, channels, height, width);
+          
+        for (int ctop = 0; ctop < channels; ++ctop) {
+          
+            int c = (ctop*group_size + gh)*group_size + gw;
+            // printf("c:%d %d %d %d\n", c, channels, height, width);
 
-        bottom_data += (roi_batch_ind * channels + c) * height * width;
+            bottom_data += (roi_batch_ind * channels + c) * height * width;
 
-        //printf("get value: %d, %d, %d, %f\n", c, 270, 765, bottom_data[270*width + 765]);
-        float out_sum = 0;
-        float bin_area = 0;
-      	for (int h = hstart; h < hend; ++h) {
-      	  for (int w = wstart; w < wend; ++w) {
-      	    int bottom_index = h*width + w;
-            float p1 = (grid_x2 - grid_x1) * (h - grid_y1) - (w - grid_x1) * (grid_y2 - grid_y1);
-            float p2 = (grid_x3 - grid_x2) * (h - grid_y2) - (w - grid_x2) * (grid_y3 - grid_y2);
-            float p3 = (grid_x4 - grid_x3) * (h - grid_y3) - (w - grid_x3) * (grid_y4 - grid_y3);
-            float p4 = (grid_x1 - grid_x4) * (h - grid_y4) - (w - grid_x4) * (grid_y1 - grid_y4);
-            if(p1 >= 0 && p2 >= 0 && p3 >= 0 && p4 >= 0){
-              out_sum += bottom_data[bottom_index];
-              bin_area += 1;
+            //printf("get value: %d, %d, %d, %f\n", c, 270, 765, bottom_data[270*width + 765]);
+            float out_sum = 0;
+            float bin_area = 0;
+            for (int h = hstart; h < hend; ++h) {
+              for (int w = wstart; w < wend; ++w) {
+                int bottom_index = h*width + w;
+                float p1 = (grid_x2 - grid_x1) * (h - grid_y1) - (w - grid_x1) * (grid_y2 - grid_y1);
+                float p2 = (grid_x3 - grid_x2) * (h - grid_y2) - (w - grid_x2) * (grid_y3 - grid_y2);
+                float p3 = (grid_x4 - grid_x3) * (h - grid_y3) - (w - grid_x3) * (grid_y4 - grid_y3);
+                float p4 = (grid_x1 - grid_x4) * (h - grid_y4) - (w - grid_x4) * (grid_y1 - grid_y4);
+                if(p1 >= 0 && p2 >= 0 && p3 >= 0 && p4 >= 0){
+                  out_sum += bottom_data[bottom_index];
+                  bin_area += 1;
+                }
+              }
             }
-      	  }
-      	}
 
-        /////////////////////////////DEBUG//////////////////////////
-        //cout << "bin_area: " << bin_area <<" out_sum: " << out_sum << endl;
-        //printf("bin_area: %f, out_sum: %f\n", bin_area, out_sum);
-      	top_data[idx] = (is_empty || (bin_area ==0)) ? 0. : out_sum/bin_area;
-      	//mapping_channel[index] = c;
-        //areas[index] = bin_area;
-      
+            /////////////////////////////DEBUG//////////////////////////
+            //cout << "bin_area: " << bin_area <<" out_sum: " << out_sum << endl;
+            //printf("bin_area: %f, out_sum: %f\n", bin_area, out_sum);
+            top_data[idx] = (is_empty || (bin_area ==0)) ? 0. : out_sum/bin_area;
+            //mapping_channel[index] = c;
+            //areas[index] = bin_area;
+        }
       }
     }
   }
