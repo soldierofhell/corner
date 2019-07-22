@@ -101,16 +101,18 @@ void RPSRoIPoolForward(
         //cout << "start&&end norm: " << hstart << " " << hend << " " << wstart << " " << wend;
         //printf("start&&end norm: %d, %d, %d, %d\n", hstart, hend, wstart, wend);
 
-        //nt gw = pw;
-      	//int gh = ph;
+        int gw = pw;
+      	int gh = ph;
           
-        for (int c = 0; c < channels; ++c) {
+        //for (int c = 0; c < channels; ++c) {
+          
+            int c = (0*group_size + gh)*group_size + gw;
             
-            int idx = ((n*channels+c)*pooled_height + ph)*pooled_width + pw;
+            int idx = (n*pooled_height + ph)*pooled_width + pw;
             
             cout << " index: " << idx << endl;
           
-            //int c = (ctop*group_size + gh)*group_size + gw;
+            
             // printf("c:%d %d %d %d\n", c, channels, height, width);
 
             bottom_data += (roi_batch_ind * channels + c) * height * width;
@@ -138,7 +140,7 @@ void RPSRoIPoolForward(
             top_data[idx] = (is_empty || (bin_area ==0)) ? 0. : out_sum/bin_area;
             //mapping_channel[index] = c;
             //areas[index] = bin_area;
-        }
+        //}
       }
     }
   }
