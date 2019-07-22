@@ -18,12 +18,12 @@ class RPSRoIPool():
         batch_size, num_channels, data_height, data_width = features.size()
         num_rois = rois.size()[0]
         output = rpsroi_pooling.forward(
-            self.pooled_height,
-            self.pooled_width,
+            features,
+            rois,
             self.spatial_scale,
             self.group_size,
             self.output_dim,
-            features,
-            rois);
+            self.pooled_height,
+            self.pooled_width)
 
         return output
