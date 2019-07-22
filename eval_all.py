@@ -320,7 +320,7 @@ def main():
     rpsroi_pool = RPSRoIPool(2,2,1,2,1)
     if cuda:
         net = net.cuda()
-        rpsroi_pool = rpsroi_pool.cuda()
+        #rpsroi_pool = rpsroi_pool.cuda()
     net.eval()
     rpsroi_pool.eval()
     if os.path.exists(args.out)==False:
