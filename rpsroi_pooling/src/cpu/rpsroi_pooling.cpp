@@ -1,12 +1,13 @@
 #include <torch/extension.h>
 #include <algorithm>
+#include <iostream>
 
 using namespace std;
 
 template <typename T>
 void RPSRoIPoolForward(
     const T* bottom_data, // input
-    const T spatial_scale,
+    const float spatial_scale,
     const int channels,
     const int height,
     const int width,
@@ -28,7 +29,7 @@ void RPSRoIPoolForward(
     for (int ph = 0; ph < pooled_height; ++ph) {
       for (int pw = 0; pw < pooled_width; ++pw) {
         
-        int idx = (n*pooled_height + ph)*pooled_width + pw;
+        int idx = ((n*channels+0)*pooled_height + ph)*pooled_width + pw;
 
         float roi_x1 = static_cast<float>(round(bottom_rois[1])) * spatial_scale;
         float roi_y1 = static_cast<float>(round(bottom_rois[2])) * spatial_scale;
@@ -40,7 +41,8 @@ void RPSRoIPoolForward(
         float roi_y4 = static_cast<float>(round(bottom_rois[8])) * spatial_scale;
 
         ////////////////////////////////DEBUG////////////////////////////////////
-        //cout << "rois: " << roi_x1 << " " << roi_y1 << " " << roi_x2 << " " << roi_y2 << " " << roi_x3 << " " << roi_y3 << " " << roi_x4 << " " << roi_y4 << endl;
+        cout << "index: " << idx;
+        cout << "rois: " << roi_x1 << " " << roi_y1 << " " << roi_x2 << " " << roi_y2 << " " << roi_x3 << " " << roi_y3 << " " << roi_x4 << " " << roi_y4 << endl;
         //printf("rois: %f, %f, %f, %f, %f, %f, %f, %f\n", roi_x1, roi_y1, roi_x2, roi_y2, roi_x3, roi_y3, roi_x4, roi_y4);
 
         float anchor_x1 = static_cast<float>(pw) * (roi_x2 - roi_x1) / pooled_width + roi_x1;
