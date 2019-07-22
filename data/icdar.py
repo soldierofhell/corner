@@ -29,7 +29,7 @@ class ICDARDetection(data.Dataset):
             ic13_gt_paths = [self.root + '/icdar2013/train_gts/gt_' + timg.strip().split('.')[0] + '.txt' for timg in ic13_samples]
             ic13_img_paths = [self.root + '/icdar2013/train_images/' + timg.strip() for timg in ic13_samples]
             ## get ic15 list
-            ic15_list_path = self.root + 'icdar2015/train_list.txt'
+            ic15_list_path = self.root + '/icdar2015/train_list.txt'
             ic15_samples = open(ic15_list_path, 'r').readlines()
             ic15_gt_paths = [self.root + '/icdar2015/train_gts/gt_' + timg.strip().split('.')[0] + '.txt' for timg in ic15_samples]
             ic15_img_paths = [self.root + '/icdar2015/train_images/' + timg.strip() for timg in ic15_samples]
@@ -50,7 +50,7 @@ class ICDARDetection(data.Dataset):
             ic13_gt_paths = [] # [self.root + '/icdar2013/test_gts/' + timg.strip() + '.txt' for timg in ic13_samples]
             ic13_img_paths = [] # [self.root + '/icdar2013/test_images/' + timg.strip() for timg in ic13_samples]
             ## get ic15 list
-            ic15_list_path = self.root + 'icdar2015/test_list.txt'
+            ic15_list_path = self.root + '/icdar2015/test_list.txt'
             ic15_samples = open(ic15_list_path, 'r').readlines()
             ic15_gt_paths = [self.root + '/icdar2015/test_gts/' + timg.strip() + '.txt' for timg in ic15_samples]
             ic15_img_paths = [self.root + '/icdar2015/test_images/' + timg.strip() for timg in ic15_samples]
