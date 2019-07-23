@@ -16,12 +16,13 @@ class MultiBoxLoss(nn.Module):
 
     def forward(self, predictions, targets, segs):
         loc_data, conf_data, priors, seg_data = predictions
-        # loc_data - offset branch, [batch_size, \sum_k w_kxh_kxk=120272, q=4, offsets=4]
-        # conf_data - score branch, [batch_size, \sum_k w_kxh_kxk=120272, q=4, scores=2]) 
-        # priors - default boxes [\sum_k w_kxh_kxk=120272, x_1,x_2,s_x1,s_x2=4]
-        # seg_data - [8388608, 1]
+        # loc_data: offset branch, [batch_size, \sum_k w_kxh_kxk=120272, q=4, offsets=4]
+        # conf_data: score branch, [batch_size, \sum_k w_kxh_kxk=120272, q=4, scores=2]) 
+        # priors: default boxes [\sum_k w_kxh_kxk=120272, x_1,x_2,s_x1,s_x2=4]
+        # seg_data: position sensitive segmentation [w * h * g * g, 1]
         
-        # targets: list([batch_size][][,])
+        # targets: corners gt, list([batch_size][][,])
+# segs: segmentation gt
         
         num = loc_data.size(0) # batch_size
         priors = priors[:loc_data.size(1), :]
