@@ -19,10 +19,10 @@ class MultiBoxLoss(nn.Module):
         # loc_data: offset branch, [batch_size, \sum_k w_kxh_kxk=120272, q=4, offsets=4]
         # conf_data: score branch, [batch_size, \sum_k w_kxh_kxk=120272, q=4, scores=2]) 
         # priors: default boxes [\sum_k w_kxh_kxk=120272, x_1,x_2,s_x1,s_x2=4]
-        # seg_data: position sensitive segmentation [w * h * g * g, 1]
+        # seg_data: position sensitive segmentation [batch_size, w*h*g*g, 1]
         
         # targets: corners gt, list([batch_size][][,])
-# segs: segmentation gt, [batch_size, h, g*g]
+# segs: segmentation gt, [batch_size, w, h, g*g]
         
         num = loc_data.size(0) # batch_size
         priors = priors[:loc_data.size(1), :]
