@@ -135,7 +135,7 @@ void RPSRoIPoolForward(
             }
 
             /////////////////////////////DEBUG//////////////////////////
-            //cout << "bin_area: " << bin_area <<" out_sum: " << out_sum << endl;
+            cout << "bin_area: " << bin_area <<" out_sum: " << out_sum << endl;
             //printf("bin_area: %f, out_sum: %f\n", bin_area, out_sum);
             top_data[idx] = (is_empty || (bin_area ==0)) ? 0. : out_sum/bin_area;
           
