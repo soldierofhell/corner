@@ -123,7 +123,9 @@ void RPSRoIPoolForward(
 
             int bottom_data_shift = (roi_batch_ind * channels + c) * height * width;
           
-            bottom_data += bottom_data_shift;
+            const T* bottom_data_offset = bottom_data + bottom_data_shift;
+          
+            //bottom_data = bottom_data_shift;
           
             cout << "bottom_data shift: " << bottom_data_shift << endl;
           
@@ -143,7 +145,7 @@ void RPSRoIPoolForward(
                 float p3 = (grid_x4 - grid_x3) * (h - grid_y3) - (w - grid_x3) * (grid_y4 - grid_y3);
                 float p4 = (grid_x1 - grid_x4) * (h - grid_y4) - (w - grid_x4) * (grid_y1 - grid_y4);
                 if(p1 >= 0 && p2 >= 0 && p3 >= 0 && p4 >= 0){
-                  out_sum += bottom_data[bottom_index];
+                  out_sum += bottom_data_offset[bottom_index];
                   bin_area += 1;
                 }
               }
