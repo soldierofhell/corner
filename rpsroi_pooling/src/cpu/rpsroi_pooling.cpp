@@ -29,9 +29,9 @@ void RPSRoIPoolForward(
     bottom_rois += n * 9;
     int roi_batch_ind = bottom_rois[0];
       
-    int bottom_data_length = num_rois * channels * height * width;
+    int bottom_data_length = 1 * channels * height * width;
       
-    cout << "bottom_data size: " << bottom_data_length << endl;
+    cout << "roi_batch_ind: " << roi_batch_ind " bottom_data size: " << bottom_data_length << endl;
     
     const T* max_bd = max_element(bottom_data, bottom_data+bottom_data_length);
     const T* min_bd = min_element(bottom_data, bottom_data+bottom_data_length); 
