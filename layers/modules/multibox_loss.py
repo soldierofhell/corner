@@ -21,8 +21,10 @@ class MultiBoxLoss(nn.Module):
         # priors - default boxes [\sum_k w_kxh_kxk=120272, x_1,x_2,s_x1,s_x2=4]
         # seg_data - [8388608, 1]
         
-        num = loc_data.size(1)
-        #priors = priors[:loc_data.size(1), :]
+        print(targets.size(), segs.size())
+        
+        num = loc_data.size(0) # batch_size
+        priors = priors[:loc_data.size(1), :]
         num_priors = priors.size(0)
         num_classes = self.num_classes
 
