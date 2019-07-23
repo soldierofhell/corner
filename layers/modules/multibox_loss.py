@@ -16,6 +16,7 @@ class MultiBoxLoss(nn.Module):
 
     def forward(self, predictions, targets, segs):
         loc_data, conf_data, priors, seg_data = predictions
+        print(loc_data.size(), conf_data.size(), priors.size(), seg_data.size())
         num = loc_data.size(0)
         priors = priors[:loc_data.size(1), :]
         num_priors = priors.size(0)
