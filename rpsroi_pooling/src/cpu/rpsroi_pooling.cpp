@@ -29,8 +29,14 @@ void RPSRoIPoolForward(
     bottom_rois += n * 9;
     int roi_batch_ind = bottom_rois[0];
       
-    cout << "bottom_rois size: " << num_rois * channels * height * width << endl;
+    int bottom_data_length = num_rois * channels * height * width;
+      
+    cout << "bottom_data size: " << bottom_data_length << endl;
     
+    T* max_bd = max_element(bottom_data, bottom_data+bottom_data_length); 
+  
+    cout << *max_bd << endl; 
+  
 
         
         
@@ -175,6 +181,8 @@ at::Tensor RPSRoIPool_forward_cpu(
   int channels = input.size(1);
   int height = input.size(2);
   int width = input.size(3);
+    
+  cout << "input(0).size: " << input.size(0) << endl;
 
   at::Tensor output = at::zeros(
       {num_rois, channels, pooled_height, pooled_width}, input.options());
