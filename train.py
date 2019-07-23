@@ -92,7 +92,7 @@ dssd_net = build_dssd('train', train_cfg, ssd_dim,2)
 net = dssd_net
 
 
-if args.resume:
+if args.resume != "basenet":
     logging.info('Resuming training, loading {}...'.format(args.resume))
     dssd_net.load_weights(args.resume)
 else:
