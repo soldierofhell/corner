@@ -33,7 +33,7 @@ void RPSRoIPoolForward(
       
     cout << "bottom_data size: " << bottom_data_length << endl;
     
-    T* max_bd = max_element(bottom_data, bottom_data+bottom_data_length); 
+    const T* max_bd = max_element(bottom_data, bottom_data+bottom_data_length); 
   
     cout << *max_bd << endl; 
   
