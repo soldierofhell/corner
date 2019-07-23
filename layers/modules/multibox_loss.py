@@ -94,7 +94,7 @@ class MultiBoxLoss(nn.Module):
         loss_l /= N
         loss_c /= N
 
-        ## seg 
+        ## L_seg - Dice loss
         eps = 1e-5
         seg_gt = segs.view(-1, 1)
         intersection = torch.sum(seg_data*seg_gt)
