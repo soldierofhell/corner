@@ -121,9 +121,11 @@ void RPSRoIPoolForward(
             
             // printf("c:%d %d %d %d\n", c, channels, height, width);
 
-            bottom_data += (roi_batch_ind * channels + c) * height * width;
+            int bottom_data_shift = (roi_batch_ind * channels + c) * height * width;
           
-            cout << "bottom_data shift: " << (roi_batch_ind * channels + c) * height * width << endl;
+            bottom_data += bottom_data_shift;
+          
+            cout << "bottom_data shift: " << bottom_data_shift << endl;
           
             
 
@@ -133,6 +135,9 @@ void RPSRoIPoolForward(
             for (int h = hstart; h < hend; ++h) {
               for (int w = wstart; w < wend; ++w) {
                 int bottom_index = h*width + w;
+                if ((bottom_data_shift+bottom_index) > bottom_data_length)
+                    throw "index out of range";
+                    
                 float p1 = (grid_x2 - grid_x1) * (h - grid_y1) - (w - grid_x1) * (grid_y2 - grid_y1);
                 float p2 = (grid_x3 - grid_x2) * (h - grid_y2) - (w - grid_x2) * (grid_y3 - grid_y2);
                 float p3 = (grid_x4 - grid_x3) * (h - grid_y3) - (w - grid_x3) * (grid_y4 - grid_y3);
