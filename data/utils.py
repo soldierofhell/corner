@@ -71,7 +71,10 @@ def get_boxes(gt_paths):
             label = parts[-1]
             if '\xef\xbb\xbf' in parts[0]:
                 parts[0] = parts[0][3:]
-            x1, y1, x2, y2, x3, y3, x4, y4 = list(map(float, parts[:8]))
+            try:
+                x1, y1, x2, y2, x3, y3, x4, y4 = list(map(float, parts[:8]))
+            except ValueError:
+                continue
             ## check and norm
             box = get_tight_rect([x1, y1, x2, y2, x3, y3, x4, y4])
             item['boxes'].append(box)
