@@ -21,7 +21,7 @@ class MultiBoxLoss(nn.Module):
         # priors - default boxes [\sum_k w_kxh_kxk=120272, x_1,x_2,s_x1,s_x2=4]
         # seg_data - [8388608, 1]
         
-        print(len(targets), len(targets[0]))
+        # targets: list([batch_size][][,])
         
         num = loc_data.size(0) # batch_size
         priors = priors[:loc_data.size(1), :]
@@ -65,13 +65,12 @@ class MultiBoxLoss(nn.Module):
         batch_conf = conf_data.view(-1, self.num_classes)
         # batch_conf: [batch_size * (\sum_k w_k * h_k * k) * q, 2]
 
-        loss_c = log_sum_exp(batch_conf) - batch_conf.gather(1, conf_t.view(-1, 1))
-        
-        # loss_c: [3848704, 1]
+        loss_c = log_sum_exp(batch_conf) - batch_conf.gather(1, conf_t.view(-1, 1))        
+        # loss_c: [batch_size * (\sum_k w_k * h_k * k) * q, 1]
         
         # Hard Negative Mining
         loss_c[pos.view(-1,1)] = 0  # filter out pos boxes for now
-        loss_c = loss_c.view(num, -1)
+        loss_c = loss_c.view(num, -1) # [batch_size, (\sum_k w_k * h_k * k) * q]
         _, loss_idx = loss_c.sort(1, descending=True)
         _, idx_rank = loss_idx.sort(1)
         pos = pos.view(num, -1)
