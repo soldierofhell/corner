@@ -21,9 +21,8 @@ class MultiBoxLoss(nn.Module):
         # priors - default boxes [\sum_k w_kxh_kxk=120272, x_1,x_2,s_x1,s_x2=4]
         # seg_data - [8388608, 1]
         
-        num = loc_data.size(0)
-        print("num: ", num)
-        priors = priors[:loc_data.size(1), :]
+        num = loc_data.size(1)
+        #priors = priors[:loc_data.size(1), :]
         num_priors = priors.size(0)
         num_classes = self.num_classes
 
@@ -51,14 +50,10 @@ class MultiBoxLoss(nn.Module):
         pos = conf_t > 0
         # pos: [batch_size, \sum_k w_kxh_kxk=120272, q=4]
         
-        print('pos shape: ', pos.size())
-        
         # Localization Loss (Smooth L1)
         # Shape: [batch,num_priors,4]
         pos_idx = pos.unsqueeze(pos.dim()).expand_as(loc_data)
         # pos_idx, [8, 120272, 4, 4]
-        
-        print(pos_idx.size())
         
         loc_p = loc_data[pos_idx].view(-1, 4)
         loc_t = loc_t[pos_idx].view(-1, 4)
@@ -66,12 +61,11 @@ class MultiBoxLoss(nn.Module):
 
         # Compute max conf across batch for hard negative mining
         batch_conf = conf_data.view(-1, self.num_classes)
-        print(batch_conf.size())
         # batch_conf: [batch_size * (\sum_k w_k * h_k * k) * q, 2]
 
         loss_c = log_sum_exp(batch_conf) - batch_conf.gather(1, conf_t.view(-1, 1))
         
-        # loss_c, [3848704, 1]
+        # loss_c: [3848704, 1]
         
         # Hard Negative Mining
         loss_c[pos.view(-1,1)] = 0  # filter out pos boxes for now
