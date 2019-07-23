@@ -182,22 +182,22 @@ def train():
     #                        repr(i) + '_' + repr(j) + '.pth')
     # torch.save(dssd_net.state_dict(), 'weights/' + args.name + '/synth' + '.pth')
 
-    # logging.info('Training SSD_CBTD_BOX on ICDAR')
-    # dataset = ICDARDetection(args.icdar_root, 'train', SSDAugmentation(
-    #     train_cfg['min_dim'], means), AnnotationTransform(), '13&&15', dim=train_cfg['min_dim'])
-    # data_loader = data.DataLoader(dataset, batch_size, num_workers=args.num_workers,
-    #                                shuffle=True, collate_fn=detection_collate, pin_memory=True)
+    logging.info('Training SSD_CBTD_BOX on ICDAR')
+    dataset = ICDARDetection(args.icdar_root, 'train', SSDAugmentation(
+        train_cfg['min_dim'], means), AnnotationTransform(), '15', dim=train_cfg['min_dim']) # '13&&15'
+    data_loader = data.DataLoader(dataset, batch_size, num_workers=args.num_workers,
+                                   shuffle=True, collate_fn=detection_collate, pin_memory=True)
     
     #logging.info('Training SSD_CBTD_BOX on TD500')
     #dataset = TD500Detection(args.td_root, 'train', SSDAugmentation(
     #(512, 512), means), AnnotationTransform(), aug=True)
     #data_loader = data.DataLoader(dataset, batch_size, num_workers=args.num_workers,
     #                              shuffle=True, collate_fn=detection_collate, pin_memory=True)
-    logging.info('Training SSD_CBTD_BOX on MLT')
-    dataset = MLTDetection(args.mlt_root, 'train', SSDAugmentation(
-        (512, 512), means), AnnotationTransform())
-    data_loader = data.DataLoader(dataset, batch_size, num_workers=args.num_workers,
-                                 shuffle=True, collate_fn=detection_collate, pin_memory=True)
+    #logging.info('Training SSD_CBTD_BOX on MLT')
+    #dataset = MLTDetection(args.mlt_root, 'train', SSDAugmentation(
+    #    (512, 512), means), AnnotationTransform())
+    #data_loader = data.DataLoader(dataset, batch_size, num_workers=args.num_workers,
+    #                             shuffle=True, collate_fn=detection_collate, pin_memory=True)
 
     for i in range(200):
         for j, batch_samples in enumerate(data_loader):
