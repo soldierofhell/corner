@@ -22,7 +22,7 @@ class MultiBoxLoss(nn.Module):
         # seg_data: position sensitive segmentation [w * h * g * g, 1]
         
         # targets: corners gt, list([batch_size][][,])
-# segs: segmentation gt
+# segs: segmentation gt, [w, h, g*g]
         
         num = loc_data.size(0) # batch_size
         priors = priors[:loc_data.size(1), :]
