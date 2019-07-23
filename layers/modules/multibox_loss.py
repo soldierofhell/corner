@@ -43,6 +43,8 @@ class MultiBoxLoss(nn.Module):
 
         pos = conf_t > 0
         
+        print('pos shape: ', pos.shape())
+        
         # Localization Loss (Smooth L1)
         # Shape: [batch,num_priors,4]
         pos_idx = pos.unsqueeze(pos.dim()).expand_as(loc_data)
@@ -55,6 +57,8 @@ class MultiBoxLoss(nn.Module):
 
         loss_c = log_sum_exp(batch_conf) - batch_conf.gather(1, conf_t.view(-1, 1))
 
+        print('loss_c shape: ', loss_c.shape())
+        
         # Hard Negative Mining
         loss_c[pos] = 0  # filter out pos boxes for now
         loss_c = loss_c.view(num, -1)
