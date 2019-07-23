@@ -18,21 +18,26 @@ class ICDARDetection(data.Dataset):
         self.transform = transform
         self.target_transform = target_transform
         self.name = dataset_name
-        self.dim = dim
+        self.dim = dim       
         
         assert(self.name == "13&&15" or self.name == '13' or self.name == '15')
+        
+        self.dataset_list = dataset_name.split('&&')
+        
         if self.split == 'train':
             assert(self.target_transform)
-            ## get ic13 list
-            ic13_list_path = self.root + '/icdar2013/train_list.txt'
-            ic13_samples = open(ic13_list_path, 'r').readlines()
-            ic13_gt_paths = [self.root + '/icdar2013/train_gts/gt_' + timg.strip().split('.')[0] + '.txt' for timg in ic13_samples]
-            ic13_img_paths = [self.root + '/icdar2013/train_images/' + timg.strip() for timg in ic13_samples]
-            ## get ic15 list
-            ic15_list_path = self.root + '/icdar2015/train_list.txt'
-            ic15_samples = open(ic15_list_path, 'r').readlines()
-            ic15_gt_paths = [self.root + '/icdar2015/train_gts/gt_' + timg.strip().split('.')[0] + '.txt' for timg in ic15_samples]
-            ic15_img_paths = [self.root + '/icdar2015/train_images/' + timg.strip() for timg in ic15_samples]
+            if '13' in self.dataset_list:
+                ## get ic13 list
+                ic13_list_path = self.root + '/icdar2013/train_list.txt'
+                ic13_samples = open(ic13_list_path, 'r').readlines()
+                ic13_gt_paths = [self.root + '/icdar2013/train_gts/gt_' + timg.strip().split('.')[0] + '.txt' for timg in ic13_samples]
+                ic13_img_paths = [self.root + '/icdar2013/train_images/' + timg.strip() for timg in ic13_samples]
+            if '15' in self.dataset_list:
+                ## get ic15 list
+                ic15_list_path = self.root + '/icdar2015/train_list.txt'
+                ic15_samples = open(ic15_list_path, 'r').readlines()
+                ic15_gt_paths = [self.root + '/icdar2015/train_gts/gt_' + timg.strip().split('.')[0] + '.txt' for timg in ic15_samples]
+                ic15_img_paths = [self.root + '/icdar2015/train_images/' + timg.strip() for timg in ic15_samples]
 
             if self.name == '13&&15':
                 image_paths = ic13_img_paths + ic15_img_paths
