@@ -28,6 +28,8 @@ void RPSRoIPoolForward(
 
     bottom_rois += n * 9;
     int roi_batch_ind = bottom_rois[0];
+      
+    cout << "bottom_rois size: " << num_rois * channels * height * width << endl;
     
 
         
@@ -116,6 +118,8 @@ void RPSRoIPoolForward(
             // printf("c:%d %d %d %d\n", c, channels, height, width);
 
             bottom_data += (roi_batch_ind * channels + c) * height * width;
+          
+            cout << "bottom_data shift: " << (roi_batch_ind * channels + c) * height * width << endl;
           
             
 
