@@ -21,7 +21,7 @@ void RPSRoIPoolForward(
     //int* mapping_channel, // channel = 1
     //float* areas) { // C[i]
     
-  cout << "channels: " << channels << " height: " << height << " width: " << width << " group size: " << group_size << endl;
+  //cout << "channels: " << channels << " height: " << height << " width: " << width << " group size: " << group_size << endl;
       
   for (int n = 0; n < num_rois; ++n) {
     // (n, c, ph, pw) is an element in the pooled output
@@ -31,12 +31,12 @@ void RPSRoIPoolForward(
       
     int bottom_data_length = 1 * channels * height * width;
       
-    cout << "roi_batch_ind: " << roi_batch_ind << " bottom_data size: " << bottom_data_length << endl;
+    //cout << "roi_batch_ind: " << roi_batch_ind << " bottom_data size: " << bottom_data_length << endl;
     
     const T* max_bd = max_element(bottom_data, bottom_data+bottom_data_length);
     const T* min_bd = min_element(bottom_data, bottom_data+bottom_data_length); 
   
-    cout << "min bd: " << *min_bd << " max bd: " << *max_bd << endl;        
+    //cout << "min bd: " << *min_bd << " max bd: " << *max_bd << endl;        
         
 
         float roi_x1 = static_cast<float>(round(bottom_rois[1])) * spatial_scale;
@@ -49,14 +49,14 @@ void RPSRoIPoolForward(
         float roi_y4 = static_cast<float>(round(bottom_rois[8])) * spatial_scale;
 
         ////////////////////////////////DEBUG////////////////////////////////////
-        cout << " n: " << n << endl;
-        cout << "rois: " << roi_x1 << " " << roi_y1 << " " << roi_x2 << " " << roi_y2 << " " << roi_x3 << " " << roi_y3 << " " << roi_x4 << " " << roi_y4 << endl;
+        //cout << " n: " << n << endl;
+        //cout << "rois: " << roi_x1 << " " << roi_y1 << " " << roi_x2 << " " << roi_y2 << " " << roi_x3 << " " << roi_y3 << " " << roi_x4 << " " << roi_y4 << endl;
         //printf("rois: %f, %f, %f, %f, %f, %f, %f, %f\n", roi_x1, roi_y1, roi_x2, roi_y2, roi_x3, roi_y3, roi_x4, roi_y4);
 
   for (int ph = 0; ph < pooled_height; ++ph) {
       for (int pw = 0; pw < pooled_width; ++pw) {
           
-        cout << " n: " << n << " ph :" << ph << " pw: " << pw;
+        //cout << " n: " << n << " ph :" << ph << " pw: " << pw;
       
         float anchor_x1 = static_cast<float>(pw) * (roi_x2 - roi_x1) / pooled_width + roi_x1;
         float anchor_y1 = static_cast<float>(pw) * (roi_y2 - roi_y1) / pooled_width + roi_y1;
@@ -116,7 +116,7 @@ void RPSRoIPoolForward(
             
             int idx = (n*pooled_height + ph)*pooled_width + pw;
             
-            cout << " index: " << idx << endl;
+            //cout << " index: " << idx << endl;
           
             
             // printf("c:%d %d %d %d\n", c, channels, height, width);
@@ -127,7 +127,7 @@ void RPSRoIPoolForward(
           
             //bottom_data = bottom_data_shift;
           
-            cout << "bottom_data shift: " << bottom_data_shift << endl;
+            //cout << "bottom_data shift: " << bottom_data_shift << endl;
           
             
 
@@ -152,11 +152,11 @@ void RPSRoIPoolForward(
             }
 
             /////////////////////////////DEBUG//////////////////////////
-            cout << "bin_area: " << bin_area <<" out_sum: " << out_sum << endl;
+            //cout << "bin_area: " << bin_area <<" out_sum: " << out_sum << endl;
             //printf("bin_area: %f, out_sum: %f\n", bin_area, out_sum);
             top_data[idx] = (is_empty || (bin_area ==0)) ? 0. : out_sum/bin_area;
           
-            cout << "top_data: " << top_data[idx] << endl;
+            //cout << "top_data: " << top_data[idx] << endl;
             //mapping_channel[index] = c;
             //areas[index] = bin_area;
         //}
