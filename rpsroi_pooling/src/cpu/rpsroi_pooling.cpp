@@ -154,9 +154,9 @@ void RPSRoIPoolForward(
             /////////////////////////////DEBUG//////////////////////////
             //cout << "bin_area: " << bin_area <<" out_sum: " << out_sum << endl;
             //printf("bin_area: %f, out_sum: %f\n", bin_area, out_sum);
-            top_data[idx] = (is_empty || (bin_area ==0)) ? 0. : out_sum/bin_area;
+            top_data[idx] = (is_empty || (bin_area ==0)) ? 0. : out_sum/bin_area;        
           
-            //cout << "top_data: " << top_data[idx] << endl;
+            //cout << "idx: " << idx << " top_data: " << top_data[idx] << endl;
             //mapping_channel[index] = c;
             //areas[index] = bin_area;
         //}
