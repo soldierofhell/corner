@@ -190,7 +190,7 @@ at::Tensor RPSRoIPool_forward_cpu(
   //cout << "input(0).size: " << input.size(0) << endl;
 
   at::Tensor output = at::zeros(
-      {num_rois, channels, pooled_height, pooled_width}, input.options());
+      {num_rois, 1, pooled_height, pooled_width}, input.options());
 
   if (output.numel() == 0) {
     return output;
