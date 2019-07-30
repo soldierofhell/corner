@@ -104,7 +104,7 @@ void RPSRoIPoolForward(
         bool is_empty = (hend <= hstart) || (wend <= wstart);
 
         /////////////////////////////////////////////////////////////////////
-        cout << "start&&end norm: " << hstart << " " << hend << " " << wstart << " " << wend;
+        //cout << "start&&end norm: " << hstart << " " << hend << " " << wstart << " " << wend;
         //printf("start&&end norm: %d, %d, %d, %d\n", hstart, hend, wstart, wend);
 
         int gw = pw;
@@ -187,7 +187,7 @@ at::Tensor RPSRoIPool_forward_cpu(
   int height = input.size(2);
   int width = input.size(3);
     
-  cout << "input(0).size: " << input.size(0) << endl;
+  //cout << "input(0).size: " << input.size(0) << endl;
 
   at::Tensor output = at::zeros(
       {num_rois, channels, pooled_height, pooled_width}, input.options());
