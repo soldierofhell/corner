@@ -59,9 +59,6 @@ def get_score(bbox, seg_pred):
     mask = np.zeros(seg_pred.shape)
     c1_x, c2_x, c3_x, c4_x, c_x = (bbox[0] + bbox[2])/2.0, (bbox[2] + bbox[4])/2.0, (bbox[4] + bbox[6])/2.0, (bbox[6] + bbox[0])/2.0, (bbox[0] + bbox[2] + bbox[4] + bbox[6])/4.0
     c1_y, c2_y, c3_y, c4_y, c_y = (bbox[1] + bbox[3])/2.0, (bbox[3] + bbox[5])/2.0, (bbox[5] + bbox[7])/2.0, (bbox[7] + bbox[1])/2.0, (bbox[1] + bbox[3] + bbox[5] + bbox[7])/4.0
-    print(mask[0].shape)
-    poly = np.array([[bbox[0], bbox[1]*1.0], [c1_x, c1_y], [c_x, c_y], [c4_x, c4_y]]).astype(np.int32)
-    #print(poly.shape, poly)
     cv2.fillConvexPoly(mask[0], np.array([[bbox[0], bbox[1]*1.0], [c1_x, c1_y], [c_x, c_y], [c4_x, c4_y]]).astype(np.int32), 1)
     cv2.fillConvexPoly(mask[1], np.array([[c1_x, c1_y], [bbox[2]*1.0, bbox[3]*1.0], [c2_x, c2_y], [c_x, c_y]]).astype(np.int32), 1)
     cv2.fillConvexPoly(mask[2], np.array([[c_x, c_y], [c2_x, c2_y], [bbox[4]*1.0, bbox[5]*1.0], [c3_x, c3_y]]).astype(np.int32), 1)
