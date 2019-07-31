@@ -66,7 +66,12 @@ def get_score(bbox, seg_pred):
     score = 0
     for i in range(4):
         score += (mask[i]*seg_pred[i]).sum()/(mask[i].sum())
+        print(i, mask[i].sum(), (mask[i]*seg_pred[i]).sum())
     score = score/4.0/255.0
+    
+    print(c1_x, c2_x, c3_x, c4_x, c_x)
+    print(c1_y, c2_y, c3_y, c4_y, c_y)
+    
     return score
 
 def get_boxes(top_left_points, top_right_points, bottom_right_points, bottom_left_points, seg_pred, seg_cuda, rpsroi_pool, thre):
@@ -127,9 +132,9 @@ def get_boxes(top_left_points, top_right_points, bottom_right_points, bottom_lef
                 if edge_len(x1, y1, x4, y4) > 5 and edge_len(x4, y4, bottom_right_point[0], bottom_right_point[1]) > 5 and edge_len(bottom_right_point[0], bottom_right_point[1], top_right_point[0], top_right_point[1]) > 5 and edge_len(top_right_point[0], top_right_point[1], x1, y1) > 5: 
                     random_box.append([x1, y1, top_right_point[0], top_right_point[1],  bottom_right_point[0], bottom_right_point[1], x4, y4])
     
+    logging.info('number of rois: ' + str(len(random_box))
 
-
-    #scores = get_score_rpsroi(random_box, seg_cuda, rpsroi_pool)
+    scores = get_score_rpsroi(random_box, seg_cuda, rpsroi_pool)
     
     scores = []
     for bbox in random_box:
@@ -234,7 +239,7 @@ def eval_img(out, seg_pred, seg_map, rpsroi_pool, img, save_name, seg_dir, box_d
         bottom_left.save(seg_dir + '/' + save_name + '_4.jpg')
 
     candidate_boxes = get_boxes(top_left_points, top_right_points, bottom_right_points, bottom_left_points, seg, seg_map, rpsroi_pool, 0.60)
-    logging.info(candidate_boxes)
+    #logging.info(candidate_boxes)
     keep = ploy_nms(candidate_boxes, 0.3)
     keep_box = []
     for j, item in enumerate(candidate_boxes):
