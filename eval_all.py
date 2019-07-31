@@ -132,7 +132,7 @@ def get_boxes(top_left_points, top_right_points, bottom_right_points, bottom_lef
                 if edge_len(x1, y1, x4, y4) > 5 and edge_len(x4, y4, bottom_right_point[0], bottom_right_point[1]) > 5 and edge_len(bottom_right_point[0], bottom_right_point[1], top_right_point[0], top_right_point[1]) > 5 and edge_len(top_right_point[0], top_right_point[1], x1, y1) > 5: 
                     random_box.append([x1, y1, top_right_point[0], top_right_point[1],  bottom_right_point[0], bottom_right_point[1], x4, y4])
     
-    logging.info('number of rois: ' + str(len(random_box))
+    logging.info('number of rois: ' + str(len(random_box)))
 
     scores = get_score_rpsroi(random_box, seg_cuda, rpsroi_pool)
     
