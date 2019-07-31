@@ -133,7 +133,9 @@ def get_boxes(top_left_points, top_right_points, bottom_right_points, bottom_lef
     
     scores = []
     for bbox in random_box:
-        scores.append(get_score(bbox, seg_cuda.data.cpu()[0]))
+        scores.append(get_score(bbox, seg_pred))
+        
+    #print(seg_pred.shape)
     
     logging.info('rpsroi_pool scores: ' + str(scores))
     for i in range(len(random_box)):
