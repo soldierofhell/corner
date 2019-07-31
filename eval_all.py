@@ -65,7 +65,7 @@ def get_score(bbox, seg_pred):
     score = 0
     for i in range(4):
         score += (mask[i]*seg_pred[i]).sum()/(mask[i].sum())
-        print(i, mask[i].sum(), (mask[i]*seg_pred[i]).sum())
+        print(i, mask[i].sum(), (mask[i]*seg_pred[i]).sum(), (mask[i]*seg_pred[i]).sum()/(mask[i].sum()))
     score = score/4.0/255.0
     
     print(c1_x, c2_x, c3_x, c4_x, c_x)
