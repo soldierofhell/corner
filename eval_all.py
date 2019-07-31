@@ -135,8 +135,8 @@ def get_boxes(top_left_points, top_right_points, bottom_right_points, bottom_lef
     
     logging.info('number of rois: ' + str(len(random_box)))
 
-    #scores = get_score_rpsroi(random_box, seg_cuda, rpsroi_pool)
-    #logging.info('rpsroi_pool scores: ' + str(scores))
+    scores = get_score_rpsroi(random_box, seg_cuda, rpsroi_pool)
+    logging.info('rpsroi_pool scores: ' + str(scores))
     
     scores = []
     for bbox in random_box:
