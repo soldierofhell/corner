@@ -237,7 +237,7 @@ def train():
             t1 = time.time()
             if j % 10 == 0:
                 logging.info('icdar-> iter:%6d epoch:%3d loss:%.6f loss_l:%.6f loss_c:%.6f loss_s:%.6f time:%.4f'%(j, i, loss.item(), loss_l.item(), loss_c.item(), loss_s.item(), (t1 - t0)))
-        if i % 5 == 0:
+        if i % 1 == 0:
             logging.info('Saving state, epoch: %d iter:%d'%(i, j))
             torch.save(dssd_net.state_dict(), 'weights/' + args.name + '/mlt_' +
                        repr(i)  + '.pth')
