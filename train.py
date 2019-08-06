@@ -241,7 +241,7 @@ def train():
             logging.info('Saving state, epoch: %d iter:%d'%(i, j))
             torch.save(dssd_net.state_dict(), 'weights/' + args.name + '/mlt_' +
                        repr(i)  + '.pth')
-    torch.save(dssd_net.state_dict(), 'weights/' + args.name + '/mlt_' + '.pth')
+    torch.save(dssd_net.state_dict(), os.path.join(args.save_folder, '/mlt_' + '.pth'))
 
 
 if __name__ == '__main__':
