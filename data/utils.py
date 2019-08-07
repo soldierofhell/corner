@@ -133,7 +133,7 @@ def generate_gt(boxes, dim=(512, 512)):
             side3 = math.sqrt(math.pow(x4 - x3, 2) + math.pow(y4 - y3, 2))
             side4 = math.sqrt(math.pow(x1 - x4, 2) + math.pow(y1 - y4, 2))
             h = min(side1 + side3, side2 + side4)/2.0
-            if h*dim[0] >=3:
+            if h*dim[0] >=6:
                 theta = math.atan2(y2 - y1, x2 - x1)
                 top_left.append(np.array([x1 - h/2, y1 - h/2, x1 + h/2, y1 + h/2, theta, 1]))
                 top_right.append(np.array([x2 - h/2, y2 - h/2, x2 + h/2, y2 + h/2, theta, 1]))
@@ -151,25 +151,18 @@ def generate_gt(boxes, dim=(512, 512)):
         seg[2] = bottom_right_mask
         seg[3] = bottom_left_mask
         if len(top_left) == 0:
-            print(boxes.shape[0])
-            print(h*dim[0])
-            print(h)
+            #print(h)
             top_left.append(np.array([-1, -1, -1, -1, 0, 0]))
             top_right.append(np.array([-1, -1, -1, -1, 0, 0]))
             bottom_right.append(np.array([-1, -1, -1, -1, 0, 0]))
             bottom_left.append(np.array([-1, -1, -1, -1, 0, 0]))
 
     else:
-        print(boxes.size)
         top_left.append(np.array([-1, -1, -1, -1, 0, 0]))
         top_right.append(np.array([-1, -1, -1, -1, 0, 0]))
         bottom_right.append(np.array([-1, -1, -1, -1, 0, 0]))
         bottom_left.append(np.array([-1, -1, -1, -1, 0, 0]))
 
-    for tl in top_left:
-        if tl[0]==-1:
-            print(boxes)
-            import pdb; pdb.set_trace()
             
         
     top_left = torch.FloatTensor(np.array(top_left))
