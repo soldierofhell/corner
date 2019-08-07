@@ -160,6 +160,7 @@ def generate_gt(boxes, dim=(512, 512)):
             bottom_left.append(np.array([-1, -1, -1, -1, 0, 0]))
 
     else:
+        print(boxes.size)
         top_left.append(np.array([-1, -1, -1, -1, 0, 0]))
         top_right.append(np.array([-1, -1, -1, -1, 0, 0]))
         bottom_right.append(np.array([-1, -1, -1, -1, 0, 0]))
