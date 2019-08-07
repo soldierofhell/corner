@@ -162,6 +162,10 @@ def generate_gt(boxes, dim=(512, 512)):
         bottom_right.append(np.array([-1, -1, -1, -1, 0, 0]))
         bottom_left.append(np.array([-1, -1, -1, -1, 0, 0]))
 
+    for tl in top_left:
+        if tl[0]==-1:
+            import pdb; pdb.set_trace()
+        
     top_left = torch.FloatTensor(np.array(top_left))
     top_right = torch.FloatTensor(np.array(top_right))
     bottom_right = torch.FloatTensor(np.array(bottom_right))
