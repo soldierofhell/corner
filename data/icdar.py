@@ -96,8 +96,8 @@ class ICDARDetection(data.Dataset):
             target = np.array(target)
             img, boxes, labels = self.transform(img, target, None)
             img = img[:, :, (2, 1, 0)]
-            if boxes.size==0:
-                print(img_path)
+            #if boxes.size==0:
+            #    print(img_path)
             target, seg = generate_gt(boxes)
             return torch.from_numpy(img).permute(2, 0, 1), target, seg
 
