@@ -227,7 +227,10 @@ def train():
             # forward
             t0 = time.time()
             out = net(images)
-            loss_l, loss_c, loss_s = criterion(out, targets, segs)
+            try:
+                loss_l, loss_c, loss_s = criterion(out, targets, segs)
+            except Exception:
+                continue
             loss_s = loss_s*10
             loss = loss_l + loss_c + loss_s
             loss.backward()
