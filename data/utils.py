@@ -151,6 +151,9 @@ def generate_gt(boxes, dim=(512, 512)):
         seg[2] = bottom_right_mask
         seg[3] = bottom_left_mask
         if len(top_left) == 0:
+            print(boxes.shape[0])
+            print(h*dim[0])
+            print(h)
             top_left.append(np.array([-1, -1, -1, -1, 0, 0]))
             top_right.append(np.array([-1, -1, -1, -1, 0, 0]))
             bottom_right.append(np.array([-1, -1, -1, -1, 0, 0]))
