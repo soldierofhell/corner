@@ -133,7 +133,7 @@ def generate_gt(boxes, dim=(512, 512)):
             side3 = math.sqrt(math.pow(x4 - x3, 2) + math.pow(y4 - y3, 2))
             side4 = math.sqrt(math.pow(x1 - x4, 2) + math.pow(y1 - y4, 2))
             h = min(side1 + side3, side2 + side4)/2.0
-            if h*dim[0] >=6:
+            if h*dim[0] >=3:
                 theta = math.atan2(y2 - y1, x2 - x1)
                 top_left.append(np.array([x1 - h/2, y1 - h/2, x1 + h/2, y1 + h/2, theta, 1]))
                 top_right.append(np.array([x2 - h/2, y2 - h/2, x2 + h/2, y2 + h/2, theta, 1]))
