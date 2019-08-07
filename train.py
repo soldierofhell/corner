@@ -49,7 +49,7 @@ parser.add_argument('--clip_grad', default=False, type=bool, help='clip grad or 
 # parser.add_argument('--mode', default='iou', type=str, help='bce, iou, focal, ohnm')
 args = parser.parse_args()
 
-args.save_folder = args.save_folder + args.name
+args.save_folder = args.save_folder + '_' + args.name
 
 if os.path.exists(args.save_folder) == False:
     os.mkdir(args.save_folder)
