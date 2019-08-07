@@ -90,7 +90,7 @@ class MultiBoxLoss(nn.Module):
         
         try:
             loss_c = F.cross_entropy(conf_p, targets_weighted, size_average=False)
-         except Exception:
+        except Exception:
             import pdb; pdb.set_trace()
             raise
             
