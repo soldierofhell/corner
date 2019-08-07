@@ -88,11 +88,7 @@ class MultiBoxLoss(nn.Module):
         conf_p = conf_data_v[(pos_idx+neg_idx).gt(0)].view(-1, self.num_classes)
         targets_weighted = conf_t_v[(pos+neg).gt(0)]
         
-        try:
-            loss_c = F.cross_entropy(conf_p, targets_weighted, size_average=False)
-        except Exception:
-            import pdb; pdb.set_trace()
-            raise
+        loss_c = F.cross_entropy(conf_p, targets_weighted, size_average=False)
             
         N = num_pos.data.sum()
         loss_l /= N
