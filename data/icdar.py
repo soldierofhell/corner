@@ -80,7 +80,7 @@ class ICDARDetection(data.Dataset):
 
     def pull_item(self, index):
         img_path = self.image_paths[index]
-        img = cv2.imread(img_path)
+        img = cv2.imread(img_path, cv2.IMREAD_IGNORE_ORIENTATION | cv2.IMREAD_COLOR)
         height, width, channels = img.shape
         if self.split != 'train':
             img = cv2.resize(img, (self.dim[1], self.dim[0])).astype(np.float64)
